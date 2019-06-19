@@ -1,0 +1,87 @@
+\documentclass[12pt]{article}
+
+\usepackage{pgfplots}
+
+% \pgfplotsset{compat=1.15}
+\pgfplotsset{grid style={draw=none}}
+
+\newcommand{\belldividers}[2]{
+  \addplot [black] coordinates {
+    (-#1,0)
+    (-#1,#2)
+  } node[below,pos=0] {-#1};
+  \addplot [black] coordinates {
+    (#1,0)
+    (#1,#2)
+  } node[below,pos=0] {#1};
+}
+
+
+\begin{document}
+
+Some fancy-ass latex function:
+
+\bigskip
+
+
+\begin{figure}[!htbp]
+
+  \pgfmathdeclarefunction{gauss}{2}{%
+    \pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}%
+  }
+
+  \centering
+  \resizebox {\columnwidth} {!} {
+
+    \begin{tikzpicture}
+      \begin{axis}[
+          no markers, domain=-3:3, samples=100,
+          y axis line style={draw=none},
+          xtick=\empty, ytick=\empty,
+          axis lines*=left, xlabel=$z$, ylabel=$f(z)$,
+          every axis y label/.style={at=(current axis.above origin),anchor=south},
+          every axis x label/.style={at=(current axis.right of origin),anchor=west},
+          height=6cm, width=1.1\textwidth,
+          enlargelimits=false, clip=false, axis on top
+        ]
+        % greyed out area
+        \addplot [fill=black!20, draw=none, domain=-1.96:1.96] {gauss(0,1)} \closedcycle;
+        % graph
+        \addplot [black] {gauss(0,1)};
+        % lines
+        % center line
+        \addplot [black] coordinates {
+          (0,0)
+          (0,0.4)
+        } node[pos=0.3] {95\%};
+        % outer most lines
+        % f(2.58) = 0.0143
+        \belldividers{2.58}{0.0143}
+
+        % f(1.96) = 0.05844
+        \belldividers{1.96}{0.05844}
+
+        % f(1) = 0.2419
+        \belldividers{1}{0.2419}
+        % add horizontal line
+        \addplot [black] coordinates {
+          (-1,0.2419)
+          (0,0.2419)
+        } node[above,pos=0.5] {$\sigma_z = 1$};
+        \addplot [black] coordinates {
+          (0,0.2419)
+          (1,0.2419)
+        } node[above,pos=0.5] {$\sigma_z = 1$};
+
+        %\draw [yshift=-0.4cm, latex-latex](axis cs:-1,0) -- node [fill=white] {$\sigma_z = 1$} (axis cs:0,0);
+      \end{axis}
+    \end{tikzpicture}
+  }
+  \end{figure}
+
+
+
+\end{document}
+
+
+\end{document}
