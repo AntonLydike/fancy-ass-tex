@@ -1,0 +1,3 @@
+# Fancy-Ass LaTeX Snippets
+
+A collection of some random latex snippets. Sometimes I explain what I am doing as well...
