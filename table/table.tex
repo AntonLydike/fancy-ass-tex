@@ -1,0 +1,31 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage{multirow}
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+
+
+\begin{document}
+
+Some fancy-ass latex table:
+
+\bigskip
+
+\begin{center}
+  \begin{tabular}{ c c | C{1cm} r | l C{1cm} | }
+    \multicolumn{2}{ c }{}                  & \multicolumn{4}{ c }{X}                                \\
+    \multicolumn{2}{ c }{}                  & \multicolumn{2}{ c }{PI}   & \multicolumn{2}{ c }{HH}  \\ \cline{3-6}
+                       & \multirow{3}{*}{-} &                        &   &   &                       \\
+    \multirow{4}{*}{Y} &                    & \multicolumn{2}{ c| }{I}   & \multicolumn{2}{ c| }{II} \\
+                       &                    &                        & a & b &                       \\ \cline{3-6}
+                       & \multirow{3}{*}{+} &                        & c & d &                       \\
+                       &                    & \multicolumn{2}{ c| }{III} & \multicolumn{2}{ c| }{IV} \\
+                       &                    &                        &   &   &                       \\ \cline{3-6}
+  \end{tabular}
+\end{center}
+
+\end{document}
